@@ -1,5 +1,10 @@
 package servlets;
 
+import command.ActionFactory;
+import command.commands.ActionCommand;
+import managers.ConfigurationManager;
+import managers.MessageManager;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,23 +12,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/FoodServlet")
 public class FoodServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-        String varTextA = "Hello World!";
-        request.setAttribute("textA", varTextA);
-        String varTextB = "It JSP.";
-        request.setAttribute("textB", varTextB);
+    private void processRequest(HttpServletRequest request,
+                                HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String page;
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
+        ActionFactory client = new ActionFactory();
+        ActionCommand command = client.defineCommand(request);
+        page = command.execute(request);
+
+        if (page != null) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            dispatcher.forward(request, response);
+        } else {
+            page = ConfigurationManager.getProperty("path.page.login");
+            request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
+            response.sendRedirect(request.getContextPath() + page);
+        }
     }
 }
