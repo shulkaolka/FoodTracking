@@ -5,6 +5,7 @@ import command.commands.ActionCommand;
 import managers.ConfigurationManager;
 import managers.MessageManager;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/FoodServlet")
 public class FoodServlet extends HttpServlet {
@@ -19,6 +21,10 @@ public class FoodServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
             e.printStackTrace();
         }
     }
@@ -28,12 +34,16 @@ public class FoodServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
     }
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         String page;
 
         ActionFactory client = new ActionFactory();
