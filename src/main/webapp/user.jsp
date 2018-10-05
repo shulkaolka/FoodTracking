@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: olgal_000
@@ -15,5 +16,11 @@
     out.println(request.getAttribute("user") + ", hello!!!");
     out.println("<a href=\"FoodServlet?command=logout\">Logout</a>");
 %>
+<div align="center">
+    <h2>
+        <a href="FoodServlet?command=listall">List All Food Products</a>
+
+    </h2>
+</div>
 </body>
 </html>

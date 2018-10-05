@@ -1,6 +1,6 @@
 package command.commands;
 
-import util.DBUtil;
+import dao.DBUtil;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

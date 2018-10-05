@@ -13,9 +13,7 @@
 		<input type="text" name="login" value="" />
 		<br />Password:<br /> 
 		<input type="password" name="password" value="" />
-		<br />Admin:<br />
-		<input type="checkbox" name="isadmin" value="" />
-		<br /> ${errorLoginPassMessage} 
+		<br /> ${errorLoginPassMessage}
 		<br /> ${wrongAction} 
 		<br /> ${nullPage} 
 		<br /> 

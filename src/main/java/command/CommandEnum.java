@@ -1,8 +1,6 @@
 package command;
 
-import command.commands.ActionCommand;
-import command.commands.LoginCommand;
-import command.commands.LogoutCommand;
+import command.commands.*;
 
 public enum CommandEnum {
     LOGIN {
@@ -13,6 +11,21 @@ public enum CommandEnum {
     LOGOUT {
         {
             this.command = new LogoutCommand();
+        }
+    },
+    SEARCH {
+        {
+            this.command = new SearchCommand();
+        }
+    },
+    ADD {
+        {
+            this.command = new AddToMeCommand();
+        }
+    },
+    LISTALL {
+        {
+            this.command = new ListAllCommand();
         }
     };
     ActionCommand command;

@@ -21,4 +21,7 @@ public class ActionFactory {
         }
         return current;
     }
+    public String getCommandName(HttpServletRequest request){
+        return request.getParameter("command");
+    }
 }

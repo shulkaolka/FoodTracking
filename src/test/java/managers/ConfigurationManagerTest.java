@@ -6,6 +6,6 @@ class ConfigurationManagerTest {
 
     @org.junit.jupiter.api.Test
     void getProperty() {
-        assertEquals(ConfigurationManager.getProperty("path.page.login"), "/login.jsp");
+        assertEquals(ConfigurationManager.getProperty("path.page.allproducts"), "/allproducts.jsp");
     }
 }
